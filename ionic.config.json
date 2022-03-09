@@ -1,0 +1,7 @@
+{
+  "name": "phraseBook",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
