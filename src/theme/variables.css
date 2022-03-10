@@ -1,9 +1,6 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
-*{
-  color:black;
-}
 /** Ionic CSS Variables **/
 :root {
   --ion-color-primary: #9501cb;
@@ -89,5 +86,5 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-step-900: #e6e6e6;
   --ion-color-step-950: #f2f2f2;
 
-  --ion-toolbar-color: var(--ion-color-primary-contrast);
+
 }

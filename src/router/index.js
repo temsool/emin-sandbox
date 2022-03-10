@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 
 //import router from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
-import BaseLayout from '../components/base/BaseLayout.vue';
+
+import ChallengesPage from '../pages/ChallengesPage.vue';
 
 const routes = [
   {
@@ -14,8 +15,8 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/memories',
-    component: BaseLayout
+    path: '/challenge/:id',
+    component: ChallengesPage
   },
   
  
