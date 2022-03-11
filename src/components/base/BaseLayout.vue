@@ -14,7 +14,7 @@
         <ion-title> {{ pageTitle }}</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content fullscreen>
       <ion-grid>
         <ion-row>
           <ion-col size-md="6">
