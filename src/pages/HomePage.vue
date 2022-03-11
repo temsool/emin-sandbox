@@ -14,22 +14,23 @@
 
         <ion-button
           size="medium"
-          color="secondary"
+          color="dark"
           expand="block"
           router-link="/challenge/1"
         >
           <ion-icon slot="start" :icon="golfOutline" />
 
-          <ion-label>Challenge 1</ion-label>
+          <ion-label>Challenge 1 & 2</ion-label>
         </ion-button>
         <ion-button
+          disabled
           size="medium"
-          color="secondary"
+          color="dark"
           expand="block"
           router-link="/challenge/2"
         >
           <ion-icon slot="start" :icon="golfOutline" />
-          <ion-label>Challenge 2</ion-label>
+          <ion-label>Challenge 3</ion-label>
         </ion-button>
         <ion-buttons> </ion-buttons>
       </ion-card-content>

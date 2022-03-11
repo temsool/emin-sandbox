@@ -86,12 +86,41 @@
         <ion-item>
           <ion-input
             required
-            @click="openPicker"
-            :value="pickedYear"
+            @click="setOpen(true, $event)"
+            :value="birthday"
             placeholder="Select your Birthday"
           ></ion-input>
         </ion-item>
 
+        <ion-popover
+          :event="event"
+          keyboardClose="true"
+          @didDismiss="setOpen(false)"
+          :is-open="isOpenRef"
+          :show-backdrop="true"
+          reference="event"
+        >
+          <ion-datetime
+            size="cover"
+            @ionChange="(ev) => (birthday = formatDate(ev.detail.value))"
+            ref="customDatetime"
+            min="1930-01-01"
+            max="2012-01-01"
+            value="1986-01-01"
+            presentation="date"
+          >
+            <ion-buttons slot="buttons">
+              <ion-button
+                fill="solid"
+                color="success"
+                expand="block"
+                @click="confirm(event)"
+              >
+                Select
+              </ion-button>
+            </ion-buttons>
+          </ion-datetime>
+        </ion-popover>
         <br />
 
         <ion-card-title
@@ -164,9 +193,11 @@ import {
   IonAccordionGroup,
   IonCard,
   IonButton,
-  pickerController,
+  IonButtons,
+  IonDatetime,
   IonInput,
   IonItem,
+  IonPopover,
 } from "@ionic/vue";
 import { format, parseISO } from "date-fns";
 export default {
@@ -180,81 +211,11 @@ export default {
       totalYears: null,
       totalAmountRequired: null,
       barWidth: 0,
-      picked: {
-        birthYear: null,
-      },
-      pickingOptions: {
-        name: "birthYear",
-        options: [
-          { text: 1970, value: 1970 },
-          { text: 1971, value: 1971 },
-          { text: 1972, value: 1972 },
-          { text: 1973, value: 1973 },
-          { text: 1974, value: 1974 },
-          { text: 1975, value: 1975 },
-          { text: 1976, value: 1976 },
-          { text: 1977, value: 1977 },
-          { text: 1978, value: 1978 },
-          { text: 1979, value: 1979 },
-          { text: 1980, value: 1980 },
-          { text: 1981, value: 1981 },
-          { text: 1982, value: 1982 },
-          { text: 1983, value: 1983 },
-          { text: 1984, value: 1984 },
-          { text: 1985, value: 1985 },
-          { text: 1986, value: 1986 },
-          { text: 1987, value: 1987 },
-          { text: 1988, value: 1988 },
-          { text: 1989, value: 1989 },
-          { text: 1990, value: 1990 },
-          { text: 1991, value: 1991 },
-          { text: 1992, value: 1992 },
-          { text: 1993, value: 1993 },
-          { text: 1994, value: 1994 },
-          { text: 1995, value: 1995 },
-          { text: 1996, value: 1996 },
-          { text: 1997, value: 1997 },
-          { text: 1998, value: 1998 },
-          { text: 1999, value: 1999 },
-          { text: 2000, value: 2000 },
-          { text: 2001, value: 2001 },
-          { text: 2002, value: 2002 },
-          { text: 2003, value: 2003 },
-          { text: 2004, value: 2004 },
-          { text: 2005, value: 2005 },
-          { text: 2006, value: 2006 },
-          { text: 2007, value: 2007 },
-          { text: 2008, value: 2008 },
-          { text: 2009, value: 2009 },
-        ],
-      },
     };
   },
-  computed: {
-    pickedYear() {
-      return this.picked.birthYear.text;
-    },
-  },
+  watch: {},
   methods: {
-    async openPicker() {
-      const picker = await pickerController.create({
-        columns: [this.pickingOptions],
-        buttons: [
-          {
-            text: "Cancel",
-            role: "cancel",
-          },
-          {
-            text: "Confirm",
-            handler: (selected) => {
-              this.picked = selected;
-              console.log(selected);
-            },
-          },
-        ],
-      });
-      await picker.present();
-    },
+    calcTotalYears() {},
     calcBarWidth() {
       let birthYear = this.birthday.split(" ")[2];
       var currentTime = new Date();
@@ -282,9 +243,13 @@ export default {
     IonAccordionGroup,
     IonProgressBar,
     IonButton,
+    IonButtons,
 
+    IonDatetime,
     IonInput,
     IonItem,
+
+    IonPopover,
   },
   name: "ChallengeDetail1",
   setup() {
