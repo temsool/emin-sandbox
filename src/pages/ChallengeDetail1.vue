@@ -94,6 +94,7 @@
 
         <ion-popover
           :event="event"
+          keyboardClose="true"
           @didDismiss="setOpen(false)"
           :is-open="isOpenRef"
           :show-backdrop="false"
