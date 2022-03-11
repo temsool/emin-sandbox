@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 //import router from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 
-import ChallengesPage from '../pages/ChallengesPage.vue';
+
 
 const routes = [
   {
@@ -15,10 +15,13 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/challenge/:id',
-    component: ChallengesPage
+    path: '/challenge/1',
+    component: () => import('../pages/ChallengeDetail1.vue')
   },
-  
+  {
+    path: '/challenge/2',
+    component: () => import('../pages/ChallengeDetail2.vue')
+  },
  
 ]
 

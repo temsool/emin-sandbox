@@ -28,7 +28,8 @@ import BaseLayout from './components/base/BaseLayout';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-  
+  app.config.errorHandler = () => null;
+app.config.warnHandler = () => null;
 app.component('base-layout',BaseLayout);
 
 router.isReady().then(() => {
