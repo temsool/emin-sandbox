@@ -93,17 +93,25 @@
         </ion-item>
 
         <br />
-
-        <ion-card-title
-          >How much do you want to have each month when you
+        <ion-card-title>
+          How much do you want to have each month when you
           retire?</ion-card-title
         >
         <ion-item>
+          <ion-label position="floating">Monthly Amount</ion-label>
+
           <ion-input
             :value="monthlyAmount"
             v-model="monthlyAmount"
-            placeholder="Monthly Amount"
+            autofocus="on"
+            clearInput="true"
+            inputmode="number"
+            required="true"
+            clearOnEdit="true"
+            placeholder="e.g. 1000 £"
           ></ion-input>
+
+          <ion-icon slot="end" :icon="calculatorOutline" />
         </ion-item>
         <br />
         <ion-card-title>What age would you like to FIRE?</ion-card-title>
@@ -131,7 +139,7 @@
           >
           </ion-input>
         </ion-item>
-        <br />
+
         <ion-button expand="large" @click="calcBarWidth()"
           >Calculate</ion-button
         >
@@ -169,6 +177,8 @@ import {
   IonItem,
 } from "@ionic/vue";
 import { format, parseISO } from "date-fns";
+
+import { calculatorOutline } from "ionicons/icons";
 export default {
   data() {
     return {
@@ -248,28 +258,35 @@ export default {
             text: "Confirm",
             handler: (selected) => {
               this.picked = selected;
-              console.log(selected);
             },
           },
         ],
       });
       await picker.present();
     },
+    validator() {
+      //if age is
+      //if all fields set
+    },
     calcBarWidth() {
-      let birthYear = this.birthday.split(" ")[2];
+      let birthYear = this.picked.birthYear.text;
+
       var currentTime = new Date();
 
       var year = currentTime.getFullYear();
 
       let currentAge = birthYear - year;
-      this.totalYears = Math.abs(this.fireAge - currentAge);
       currentAge = Math.abs(currentAge);
 
-      this.totalAmountRequired = this.monthlyAmount * 12 * this.totalYears;
+      this.totalYears = Math.abs(this.fireAge - currentAge);
+
+      this.totalAmountRequired = this.monthlyAmount * 12 * 25;
+
       this.showResult = true;
       this.barWidth = ((this.howMuch / this.totalAmountRequired) * 100).toFixed(
         2
       );
+      this.barWidth /= 100; //because abr width is from 0 to 1
     },
   },
   components: {
@@ -311,7 +328,7 @@ export default {
 
     return {
       customDatetime,
-
+      calculatorOutline,
       confirm,
       setOpen,
       isOpenRef,
